@@ -1,0 +1,1 @@
+puts File.read('input.txt').split("\n").map { |line| line.split.map(&:to_i) }.then { |data| safe = ->(r) { (r.each_cons(2).all? { |a, b| a < b } || r.each_cons(2).all? { |a, b| a > b }) && r.each_cons(2).all? { |a, b| (1..3).cover?((a - b).abs) } }; "#{data.count { |r| safe[r] }} #{data.count { |r| safe[r] || (0...r.length).any? { |i| safe[r[0...i] + r[(i+1)..-1]] } }}"}
